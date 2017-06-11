@@ -13,6 +13,7 @@ import SimpleTouch from './app/component/simple-touch/SimpleTouch';
 import TestAnimationFade from './app/component/simple-animation/TestAnimationFade';
 import TestLayoutAnimation from './app/component/simple-animation/TestLayoutAnimation';
 import SpringAnimation from './app/component/simple-animation/SpringAnimation';
+import SimpleNavigation from './app/component/navigation/SimpleNavigation';
 import { AppRegistry, View } from 'react-native';
 
 export default class AwesomeProject extends Component {
