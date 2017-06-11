@@ -1,47 +1,51 @@
 import React, { Component } from 'react';
 import { AppRegistry, Animated, Easing, View, Button, LayoutAnimation, UIManager } from 'react-native';
 
-UIManager.setLayoutAnimationEnabledExperimental &&
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-
-const AButton = Animated.createAnimatedComponent(Button);
-
 export default class SpringAnimation extends Component {
     state = {
-        value: new Animated.ValueXY({ x: 0, y: 0 })
+        value: new Animated.ValueXY({ x: 0, y: 0 }),
+        on: false
     };
 
-    onPress = () => {
-        this.springLayout();
-    }
-
-    springLayout = () => {
-        LayoutAnimation.spring();
-        this.setState(prevState => ({ w: prevState.w + 25, h: prevState.h + 25 }));
-    }
-
-    onPress2 = () => {
-        this.springLayout();
-
-        Animated.timing(this.state.fadeAnim,
+    componentDidMount() {
+        Animated.spring(
+            this.state.value,
             {
-                toValue: 1
+                toValue: { x: 100, y: 0 },
+                tension: 100
             }
         ).start();
+
+        this.setState(prevState => ({ on: true }));
+    }
+
+    onPress = () => {
+        console.log(this.state.on);
+        const newX = this.state.on ? 0 : 100;
+
+        // this.setState(prevState => ({ value: new Animated.ValueXY({ x: newX, y: 0 }) }))
+
+        Animated.spring(
+            this.state.value,
+            {
+                toValue: { x: newX, y: 0 },
+                tension: 100
+            }
+        ).start();
+
+        this.setState(prevState => ({ on: !prevState.on }));
     }
 
     render() {
         console.log('ok render');
 
         return (
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{ width: this.state.w, height: this.state.h, backgroundColor: 'red' }}>
+            <View>
+                <Animated.View style={{ left: this.state.value.x, top: this.state.value.y, width: 100, height: 100, backgroundColor: 'red' }}>
 
-                </View>
+                </Animated.View>
 
-                <Button title='Press me' onPress={this.onPress} />
-
-                <AButton style={{ opacity: this.state.fadeAnim }} title='Press me with animate' onPress={this.onPress2} />
+                <Button title='Click me' onPress={this.onPress} />
             </View>
         );
     }

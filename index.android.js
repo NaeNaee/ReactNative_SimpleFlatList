@@ -12,13 +12,14 @@ import ShipList from './app/component/ship-list-with-flat-list/ShipList';
 import SimpleTouch from './app/component/simple-touch/SimpleTouch';
 import TestAnimationFade from './app/component/simple-animation/TestAnimationFade';
 import TestLayoutAnimation from './app/component/simple-animation/TestLayoutAnimation';
+import SpringAnimation from './app/component/simple-animation/SpringAnimation';
 import { AppRegistry, View } from 'react-native';
 
 export default class AwesomeProject extends Component {
   render() {
     return (
       <View>
-        <TestLayoutAnimation />
+        <SpringAnimation />
       </View>
     );
   }
